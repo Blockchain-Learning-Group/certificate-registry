@@ -8,7 +8,7 @@ var indexRoutes = [
   { path: "/landing-page", name: "LandingPage", component: LandingPage },
   { path: "/how-it-works", name: "LandingPage", component: LandingPage },
   { path: "/admin", name: "AdminPage", component: AdminPage },
-  { path: "/profile", name: "ProfilePage", component: ProfilePage },
+  { path: "/profile/:id", name: "ProfilePage", component: ProfilePage },
   { path: "/login-page", name: "LoginPage", component: LoginPage },
   { path: "/components", name: "Components", component: Components }
 ];
