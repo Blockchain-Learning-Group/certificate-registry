@@ -1,23 +1,16 @@
-const log = require('../logger');
+const Web3 = require('web3');
 
 /**
  * Sign an object of data with a private key
  * @param {*} rawData 
- * @param {*} hashingAlgo 
  */
-module.exports = async function(rawData, hashingAlgo='sha256') {
-  log.info({ module: 'sig' }, `Signing ${JSON.stringify(rawData)} ...`);
-
-  // Hash the rawData
-  // const hash = ...;
-
-  // Load the private key?
+module.exports = async function(rawData) {
+  // Load the private key from env
   const priv = process.env.PRIV;
 
-  // Sign the hash of the data
-  // const sig = ...;
-  const sig = { v: 32, r: 123, s: 123 };
+  // Sign the data
+  const web3 = new Web3();
+  const sig = web3.eth.accounts.sign(JSON.stringify(rawData), priv);
 
-  // log.info({ module: 'sig' }, `Signed ${hash} successfully.`);
   return sig;
 }

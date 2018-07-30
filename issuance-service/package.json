@@ -27,6 +27,7 @@
     "restify-errors": "^5.0.0",
     "restify-router": "^0.5.0",
     "rethinkdb": "^2.3.3",
+    "web3": "^1.0.0-beta.35",
     "yargs": "^11.0.0"
   },
   "devDependencies": {

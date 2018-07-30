@@ -24,6 +24,14 @@ will default to empty or latest is not specified
   * @param {Timestamp} expiryDate When the certification of this course expires
   */
   ```
+- return
+  ```
+  body: { 
+    dbId: 'c55bf4c6-63ff-4d35-8f86-cbf3f33ea0ae',
+    merkleRoot: 'CDDA623B264BFBA196CCAC3BDBA76316B9C8B653DEE4A786154F0CADB2B29F00',
+    ipfsHash: 'QmUVGD7MpgF1SZqs5jDmbSjgqGGSBSBKSaYVS71g7ZCHVs' 
+  } 
+  ```
 
 ## Certificates
 - createCertificates
@@ -37,3 +45,10 @@ will default to empty or latest is not specified
   * @param {Address} issuingAuthorityAddress ETH Address
   */
   ```
+  - return
+    ```
+    body: { 
+      dbId: 'c55bf4c6-63ff-4d35-8f86-cbf3f33ea0ae',
+      ipfsHash: 'QmUVGD7MpgF1SZqs5jDmbSjgqGGSBSBKSaYVS71g7ZCHVs' 
+    } 
+    ```

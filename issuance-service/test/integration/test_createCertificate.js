@@ -1,7 +1,6 @@
 const argv = require('../../src/argv');
 const { assert, expect } = require('chai');
 const startServer = require('../../src/server');
-const nock = require('nock');
 const { sendRequest, sleep } = require('../../src/utils');
 
 const apiUrl = argv['api-url'];
@@ -19,7 +18,7 @@ describe('/createCertificate POST', () => {
   });
 
   describe('creating a class with valid parameters', () => {
-    const classIpfsHash = "Qmeo3hJhr9RQ3gUe81Th5gxxov9BaVgYRAHRjmBpZr7ycr";
+    const classIpfsHash = "QmNiDqBjgKxVapuSX4TArzDa2hBAPgaPSeqCSYQtiG4kLJ";
     const recipientName = "Full name";
     const recipientAddress = "0x1";
     const issuingAuthority = "Full name";

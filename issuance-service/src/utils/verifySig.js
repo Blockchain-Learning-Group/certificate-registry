@@ -1,15 +1,13 @@
-const log = require('../logger');
+const Web3 = require('web3');
+const { recoverAddressFromSig } = require('../utils');
 
 /**
  * Verify a signature
  * @param {*} address 
  * @param {*} sig 
  */
-module.exports = async function(data, address, sig) {
-  log.info({ module: 'sig' }, `Verifying signature against address: ${address}...`);
-
-  // verification step
-  // gen hash and verify sig
-  
-  return true;
+module.exports = async function(address, sig) {
+  const recoveredAddress = recoverAddressFromSig(sig);  
+  return recoveredAddress === address;
 }
+

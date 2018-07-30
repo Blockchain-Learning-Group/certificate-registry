@@ -17,16 +17,15 @@ const router = new Router();
  */
 async function createCertificate(req, res, next) {
   try {
-    const { classIpfsHash, recipientName, recipientAddress, issuingAuthority, issuingAuthorityAddress } = req.body;
+    const { classIpfsHash, issuingAuthorityAddress } = req.body;
     
     // Get the class data from ipfs
-    // const data = JSON.parse(await ipfs.getContentFromIpfs(classIpfsHash));
-    const data = JSON.parse('{"studentAddresses":["0xad72A42A278881311929DCE42D328CD1a4568Ac3","0xad72A42A278881311929DCE42D328CD1a4568Ac3","0xad72A42A278881311929DCE42D328CD1a4568Ac3","0xad72A42A278881311929DCE42D328CD1a4568Ac3"],"studentNames":["Adam Lemmon","Adam Lemmon","Adam Lemmon","Adam Lemmon"],"location":"toronto CA","description":"3 day bootcamp","expiryDate":1564498791504,"CDDA623B264BFBA196CCAC3BDBA76316B9C8B653DEE4A786154F0CADB2B29F00":"CDDA623B264BFBA196CCAC3BDBA76316B9C8B653DEE4A786154F0CADB2B29F00"}');
+    const data = await ipfs.getContentFromIpfs(classIpfsHash);
 
-    // Create the cert object to be created
-    const cert = new Object(req.body);
+    // Create the cert object to be saved
+    const cert = Object.assign({}, req.body);
     cert.expiryDate = data.expiryDate;
-    // cert.merkleRoot = data.merkleRoot;
+    cert.merkleRoot = data.merkleRoot;
     cert.signatures = {};
     cert.verificationLink = '';
 
@@ -38,8 +37,8 @@ async function createCertificate(req, res, next) {
     const sig = await signData(data);
 
     // Verify the sig against the issuing authority
-    if (!verifySig(data, issuingAuthorityAddress, sig)) {
-      throw new errors.BadRequest('Generated signature, does not match the issuing authority');
+    if (!verifySig(issuingAuthorityAddress, sig)) {
+      throw new errors.BadRequest('Generated signature, does not match the issuing authority.');
     }
 
     // Add to the cert and leave a placeholder for the recipient to counter sign
@@ -47,16 +46,13 @@ async function createCertificate(req, res, next) {
     cert.signatures.recipientSignature = null;
 
     // Push raw data to ipfs
-    // const ipfsHash = await ipfs.addContentToIpfs(cert);
-    const ipfsHash = 'Qmeo3hJhr9RQ3gUe81Th5gxxov9BaVgYRAHRjmBpZr7ycr'; 
+    const ipfsHash = await ipfs.addContentToIpfs(cert);
     cert.ipfsHash = ipfsHash;
 
     // Store resultant in db
     const dbId = (await db.insertObject(cert, 'certificates')).id;
 
-    const response = { dbId, ipfsHash };
-
-    res.send(201, response);
+    res.send(201, { dbId, ipfsHash });
     return next();
   } catch (err) {
     return next(err);
