@@ -5,8 +5,8 @@ MAINTAINER Adam Lemmon <adam@blockscalesolutions.com>
 RUN npm install -g yarn
 
 # Create app directory
-COPY . /usr/src/db-service
-WORKDIR /usr/src/db-service
+COPY . /usr/src/issuance-service
+WORKDIR /usr/src/issuance-service
 
 # Install app dependencies
 RUN yarn

@@ -7,6 +7,7 @@ const { getMethodAPI, getIP } = require('./utils');
 
 // routers
 const classesRouter = require('./routes/classes');
+const certificatesRouter = require('./routes/certificates');
 
 function start(serverPort) {
   return new Promise(async (resolve, reject) => {
@@ -44,6 +45,7 @@ function start(serverPort) {
 
     // apply routes
     classesRouter.applyRoutes(server);
+    certificatesRouter.applyRoutes(server);
 
     server.listen(serverPort);
 

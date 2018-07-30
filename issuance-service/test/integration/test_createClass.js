@@ -44,7 +44,6 @@ describe('/createClass POST', () => {
     it('should return a 201', async () => {
       const res = await sendRequest(apiUrl, 'createClass', 'POST', newClass);
       const { statusCode } = res;
-
       assert.strictEqual(statusCode, 201, 'statusCode incorrect');
     });
 

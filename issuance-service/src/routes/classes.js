@@ -18,18 +18,20 @@ const router = new Router();
 async function createClass(req, res, next) {
   try {
     const { studentAddresses, studentNames, description, location, expiryDate } = req.body;
-    
+    const newClass = new Object(req.body);
+
     // Compute merkle tree of student addresses
     const tree = merkle('sha256').sync(studentAddresses);
     const merkleRoot = tree.root();
 
     // Push raw data to ipfs
-    req.body[merkleRoot] = merkleRoot;
+    newClass.merkleRoot = merkleRoot;
+    // const ipfsHash = 'Qmeo3hJhr9RQ3gUe81Th5gxxov9BaVgYRAHRjmBpZr7ycr'; 
     const ipfsHash = await ipfs.addContentToIpfs(req.body);
 
     // Store resultant in db
-    req.body[ipfsHash] = ipfsHash;
-    const dbId = (await db.insertObject(req.body, 'classes')).id;
+    newClass.ipfsHash = ipfsHash;
+    const dbId = (await db.insertObject(newClass, 'classes')).id;
 
     const response = { merkleRoot, ipfsHash, dbId };
 

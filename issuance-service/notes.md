@@ -26,3 +26,14 @@ will default to empty or latest is not specified
   ```
 
 ## Certificates
+- createCertificates
+  ```
+  /**
+  * Create a new class record
+  * @param {String} classIpfsHash Location of the information on the class this cert is regarding
+  * @param {String} recipientName Full name
+  * @param {Address} recipientAddress ETH Address
+  * @param {String} issuingAuthority Full name
+  * @param {Address} issuingAuthorityAddress ETH Address
+  */
+  ```
