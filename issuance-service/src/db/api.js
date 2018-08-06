@@ -27,6 +27,16 @@ async function init() {
   }
 }
 
+/**
+ * Get an object from the db
+ * @param {Object} filter The query filter
+ * @param {String} table table to query within
+ * @return {Cursor} the documents that were found, if any
+ */
+async function getObject(filter, table) {
+  const cursor = await r.table(table).filter(filter).run(conn);
+  return cursor;
+}
 
 /**
  * Insert a new object into a table
@@ -36,11 +46,11 @@ async function init() {
 async function insertObject(data, table) {
   const result = await r.table(table).insert(data).run(conn);
   const id = result['generated_keys'][0];
-
   return { id };
 }
 
 module.exports = {
   init,
-  insertObject
+  insertObject,
+  getObject
 };

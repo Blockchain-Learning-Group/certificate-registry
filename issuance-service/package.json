@@ -8,6 +8,7 @@
     "start": "node ./src/cluster",
     "test": "node ./test/tests --test-dir units && node ./test/tests --test-dir integration",
     "integration-test": "node ./test/tests --test-dir integration",
+    "issue-certs": "node ./cli/issueCertificates",
     "unit-test": "node ./test/tests --test-dir units"
   },
   "author": "Blockscale Solutions Inc.",

@@ -1,0 +1,15 @@
+{
+    "location": "Toronto, Ontario, Canada",
+    "description": "Blockchain Application Development Fundamentals",
+    "issuingAuthority": "Blockchain Learning Group Inc.",
+    "issuingAuthorityAddress": "0xcfe2bd9f6b83d446ffcb911b7873685b35736815",
+    "daysValidFor": "365",
+    "recipients": [
+        {
+            "firstNames": "Adam John",
+            "lastName": "Lemmon",
+            "email": "adamjlemmon@gmail.com",
+            "address": "0xad72A42A278881311929DCE42D328CD1a4568Ac3"
+        }
+    ]
+}

@@ -6,22 +6,11 @@ services:
     ports:
       - "8080:8080"
       - "28015:28015"
+    volumes:
+      - ./db-data:/data 
     networks:
       testing_net:
         ipv4_address: 172.28.1.14
-
-  # db-service:
-  #   build: ../db-service
-  #   command: ["yarn", "start", "--db-host", "rethinkdb"]
-  #   volumes:
-  #     - ../db-service:/usr/src/db-service
-  #   ports:
-  #     - "3000:3000"
-  #   depends_on:
-  #     - rethinkdb
-  #   networks:
-  #     testing_net:
-  #       ipv4_address: 172.28.1.1
 
 networks:
   testing_net:

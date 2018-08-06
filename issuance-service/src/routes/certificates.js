@@ -8,40 +8,34 @@ const { ipfs, signData, verifySig } = require('../utils');
 const router = new Router();
 
 /**
- * Create a new class record
- * @param {String} classIpfsHash Location of the information on the class this cert is regarding
- * @param {String} recipientName Full name
- * @param {Address} recipientAddress ETH Address
- * @param {String} issuingAuthority Full name
- * @param {Address} issuingAuthorityAddress ETH Address
+ * Issue a new certificate to a successful student
+ * @param {Object} cert 
+ *  @param {String} cert.description 
+ *  @param {Date} cert.expiryDate 
+ *  @param {String} cert.recipient.firstNames 
+ *  @param {String} cert.recipient.lastName
+ *  @param {String} cert.recipient.email
+ *  @param {Address} cert.recipient.address ETH Address
+ *  @param {String} cert.issuingAuthority Full name
+ *  @param {Address} cert.issuingAuthorityAddress ETH Address
  */
-async function createCertificate(req, res, next) {
+async function issueCertificate(req, res, next) {
   try {
-    const { classIpfsHash, issuingAuthorityAddress } = req.body;
-    
-    // Get the class data from ipfs
-    const data = await ipfs.getContentFromIpfs(classIpfsHash);
-
     // Create the cert object to be saved
-    const cert = Object.assign({}, req.body);
-    cert.expiryDate = data.expiryDate;
-    cert.merkleRoot = data.merkleRoot;
-    cert.signatures = {};
-    cert.verificationLink = '';
-
-    // Compute merkle proof for this address 
-    // const tree = merkle('sha256').sync(studentAddresses);
-    // const merkleRoot = tree.root();
-
+    const cert = Object.assign({}, req.body.cert);
+    
     // Sign the cert with the issuing authority key
-    const sig = await signData(data);
+    const sig = await signData(cert);
+    
+    cert.signatures = {};
+    // cert.verificationLink = ''; TODO consider way to verify on-chain
 
     // Verify the sig against the issuing authority
-    if (!verifySig(issuingAuthorityAddress, sig)) {
+    if (!verifySig(cert.issuingAuthorityAddress, sig)) {
       throw new errors.BadRequest('Generated signature, does not match the issuing authority.');
     }
 
-    // Add to the cert and leave a placeholder for the recipient to counter sign
+    // Add sigs to the cert and leave a placeholder for the recipient to counter sign
     cert.signatures.issuingAuthoritySignature = sig;
     cert.signatures.recipientSignature = null;
 
@@ -59,7 +53,27 @@ async function createCertificate(req, res, next) {
   }
 }
 
+/**
+ * Get a certificate for a given identifier
+ * @param {String} filter JSON.stringified objects, specific query for the certificates db
+ * @return {Object} cert when it may be found
+ */
+async function getCertificates(req, res, next) {
+  try {
+    const filter = JSON.parse(req.params.filter);
+
+    // Query db for the given certs
+    const cursor = await db.getObject(filter, 'certificates');
+    const certs = await cursor.toArray();
+
+    res.send(200, certs);
+    return next();
+  } catch (err) {
+    return next(err);
+  }
+}
 // ROUTES
-router.post({ path: '/createCertificate', version: '1.0.0' }, createCertificate);
+router.get({ path: '/getCertificates/:filter', version: '1.0.0' }, getCertificates);
+router.post({ path: '/issueCertificate', version: '1.0.0' }, issueCertificate);
 
 module.exports = router;

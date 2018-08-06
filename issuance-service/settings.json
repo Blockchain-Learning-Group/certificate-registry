@@ -1,0 +1,9 @@
+{
+    "apiUrl": "http://localhost",
+    "apiPort": "3001",
+    "dbUrl": "http://localhost",
+    "dbPort": "28015",
+    "dbName": "certification-registry",
+    "ipfsUrl": "https://ipfs.infura.io",
+    "ipfsPort": "5001"
+}
