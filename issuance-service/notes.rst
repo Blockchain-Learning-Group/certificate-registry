@@ -93,7 +93,8 @@ POST issueCertificates { cert }
     "location":"Toronto, Ontario, Canada",
     "description":"Blockchain Application Development Fundamentals",
     "issuingAuthority":"Blockchain Learning Group Inc.",
-    "expiryDate":2083002067965,
+    "issuanceDate": "Mon Aug 06 2018 20:22:44 GMT-0400 (EDT)",
+    "expiryDate": "Tue Aug 06 2019 20:22:44 GMT-0400 (EDT)",
     "recipient": {"firstNames":"Adam John","lastName":"Lemmon","email":"adamjlemmon@gmail.com","address":"0xad72A42A278881311929DCE42D328CD1a4568Ac3"},
     "signatures": {
       "issuingAuthoritySignature":{"message":"{\"location\":\"Toronto, Ontario, Canada\",\"description\":\"Blockchain Application Development Fundamentals\",\"issuingAuthority\":\"Blockchain Learning Group Inc.\",\"expiryDate\":2083002067965,\"recipient\":{\"firstNames\":\"Adam John\",\"lastName\":\"Lemmon\",\"email\":\"adamjlemmon@gmail.com\",\"address\":\"0xad72A42A278881311929DCE42D328CD1a4568Ac3\"}}","messageHash":"0x6ccd4b022cb44877e9e27e5726089d9472ae6936d69318668e61d94625448790","v":"0x1c","r":"0xdfb8cc5915ddee304a264a480da37b9785dd0f7cd245eeb7cb68c5e9b5d9fa38","s":"0x210553450807fe703e06ba9b80c78e82bd16c5a5f68429ef8d7b9bbccf94d664","signature":"0xdfb8cc5915ddee304a264a480da37b9785dd0f7cd245eeb7cb68c5e9b5d9fa38210553450807fe703e06ba9b80c78e82bd16c5a5f68429ef8d7b9bbccf94d6641c"},
