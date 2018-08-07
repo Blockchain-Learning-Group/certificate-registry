@@ -12,6 +12,7 @@ const router = new Router();
  * @param {Object} cert 
  *  @param {String} cert.description 
  *  @param {Date} cert.expiryDate 
+ *  @param {Date} cert.issuanceDate 
  *  @param {String} cert.recipient.firstNames 
  *  @param {String} cert.recipient.lastName
  *  @param {String} cert.recipient.email

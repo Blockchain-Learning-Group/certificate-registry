@@ -1,4 +1,4 @@
-FROM node:carbon
+FROM node:9.3.0
 
 MAINTAINER Adam Lemmon <adam@blockscalesolutions.com>
 
@@ -12,4 +12,4 @@ WORKDIR /usr/src/issuance-service
 RUN yarn
 
 CMD ["yarn", "start"]
-EXPOSE 3000
+EXPOSE 3001

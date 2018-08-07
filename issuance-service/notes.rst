@@ -1,9 +1,17 @@
 ########
-Usage
+CLI Usage
 ########
 
-- Start the issuance service: ``yarn start``
-- Update the json of certificates to issue: ````
+- Start the rethinkdb and issuance service: ``docker-compose up``
+- Update the json of certificates to issue ``issuedCertificates/toIssue.json``
+- Execute the script to issue the certs ``yarn issue-certs``
+
+
+##########
+App Usage
+##########
+- start rethink and issuance service: ``docker-compose up``
+- start the app server: **NOTE set correct api url** ``cd app &&  REACT_APP_API_URL=http://localhost yarn start``
 
 
 ########

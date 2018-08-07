@@ -12,8 +12,8 @@ async function init() {
   try {
     log.info({ module: 'db' }, 'Creating new db connection...');
 
-    const host = argv['db-host'];
-    const port = argv['db-port'];
+    const host = process.env.DB_LOCATION || 'localhost';
+    const port = process.env.DB_PORT || '28015';
 
     conn = await connect(host, port);
 
