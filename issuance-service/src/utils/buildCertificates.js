@@ -15,13 +15,15 @@ module.exports = () => {
 
   // Compute the expiry for all certs to be issued
   const date = new Date();
-  const expiryDate = date.setDate(date.getDate() + daysValidFor);
+  const expiryDate = date.setDate(date.getDate() + Number(daysValidFor));
+
   let cert = { 
     location, 
     description, 
     issuingAuthority, 
     issuingAuthorityAddress: issuingAuthorityAddress.toLowerCase(), 
-    expiryDate 
+    issuanceDate: (new Date).toString(),
+    expiryDate: (new Date(expiryDate)).toString()
   };
 
   for (let i = 0; i < recipients.length; i++) {
