@@ -1,8 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import Main from "./Main";
+// import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+import "assets/scss/material-kit-react.css?v=1.1.0";
+
+ReactDOM.render(
+  <Main />,
+  document.getElementById("root")
+);
+
+// registerServiceWorker();

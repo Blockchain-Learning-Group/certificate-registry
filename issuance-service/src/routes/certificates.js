@@ -8,6 +8,47 @@ const { ipfs, signData, verifySig } = require('../utils');
 const router = new Router();
 
 /**
+ * Recipient is countersigning the certificate
+ * @param {String} id ID of the cert in the db
+ * @param {String || Object} sig Sig depending on version of web3
+ */
+async function countersignCert(req, res, next) {
+  try {
+    const { sig, id } = req.body;
+    const filter = { id };
+
+    // Query db for the given certs
+    const certs = await (await db.getObject(filter, 'certificates')).toArray();
+
+    if (certs.length !== 1) {
+      throw new errors.BadRequest(`DB returned 2 records with the ID: ${id}`);
+    }
+
+    // Update the cert locally with the new sig
+    const cert = certs[0]
+    const { signatures } = cert;
+    signatures.recipientSignature = sig;
+    cert.signatures = signatures;
+
+    // Push to ipfs with sig
+    const ipfsHash = await ipfs.addContentToIpfs(cert);
+
+    // Update the db record with latest ipfs hash and sig
+    const update = { signatures, ipfsHash };
+    const { replaced } = await db.updateObject(filter, 'certificates', update);
+
+    if (replaced !== 1) {
+      throw new errrors.BadRequest(`ID: ${id} could not be updated...`);
+    }
+
+    res.send(200, { ipfsHash });
+    return next();
+  } catch (err) {
+    return next(err);
+  }
+}
+
+/**
  * Issue a new certificate to a successful student
  * @param {Object} cert 
  *  @param {String} cert.description 
@@ -73,8 +114,12 @@ async function getCertificates(req, res, next) {
     return next(err);
   }
 }
+
+
+
 // ROUTES
 router.get({ path: '/getCertificates/:filter', version: '1.0.0' }, getCertificates);
 router.post({ path: '/issueCertificate', version: '1.0.0' }, issueCertificate);
+router.put({ path: '/countersignCert', version: '1.0.0' }, countersignCert);
 
 module.exports = router;

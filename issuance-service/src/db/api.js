@@ -39,6 +39,18 @@ async function getObject(filter, table) {
 }
 
 /**
+ * Get an object from the db
+ * @param {Object} filter The query filter
+ * @param {String} table table to query within
+ * @param {Object} update the update to make
+ * @return {Cursor} the documents that were found, if any
+ */
+async function updateObject(filter, table, update) {
+  const res = await r.table(table).filter(filter).update(update).run(conn);
+  return res;
+}
+
+/**
  * Insert a new object into a table
  * @param {Object} data All required class data to hold
  * @param {String} table Table to insert into 
@@ -52,5 +64,6 @@ async function insertObject(data, table) {
 module.exports = {
   init,
   insertObject,
-  getObject
+  getObject,
+  updateObject
 };

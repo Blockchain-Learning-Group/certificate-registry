@@ -18,27 +18,47 @@ import Parallax from "components/Parallax/Parallax.jsx";
 // import blg from "assets/img/blg.jpg";
 
 import profilePageStyle from "assets/jss/material-kit-react/views/profilePage.jsx";
-import getCertificates from "../../stores/requests";
+import getCertificates from "../../stores/getCertificates";
 import ProfileForm from "../../components/ProfileForm";
 import CertificateForm from "../../components/CertificateForm";
+import Loading from "../../components/Loading";
+
+import Countersign from '../../services/Web3';
 
 class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       certificates: [],
-      userProfile: []
+      userProfile: [],
+      loading: false
     }
   }
 
+  /**
+   * Sort by latest issuance date
+   * @param {*} a 
+   * @param {*} b 
+   */
+  sortLatest(a,b) {
+    if (a.issuanceDate > b.issuanceDate)
+      return -1;
+    if (a.issuanceDate < b.issuanceDate)
+      return 1;
+    return 0;
+  }
+  
   async componentDidMount() {
+    this.setState({ loading: true });
     const { id } = this.props.match.params;
 
     if (id) {
       const certificates = await getCertificates(JSON.stringify({ recipientEmail: id }));
 
       if (certificates) {
-        this.setState({ certificates: certificates.reverse() });
+        const sorted = certificates.sort(this.sortLatest);
+
+        this.setState({ certificates: sorted });
 
         // Set data to be rendered
         const userProfile = [
@@ -61,15 +81,35 @@ class ProfilePage extends React.Component {
         ];
 
         this.setState({ userProfile });
+        this.setState({ loading: false });
       }
     }
   }
 
+  countersign = async ({ currentTarget }) => {
+    const { id } = currentTarget;
+    const certs = this.state.certificates;    
+    const cert = certs[id];
+    
+    // Send req to sign
+    this.setState({ loading: true });
+    const { data, sig } = await Countersign(cert);
+    
+    // Update cert with latest ipfs hash and new sig
+    cert.ipfsHash = data.ipfsHash;
+    cert.signatures.recipientSignature = sig;
+    certs[id] = cert;
+    this.setState({ certificates: certs });
+    this.setState({ loading: false });
+  }
+
   render() {
     const { classes, ...rest } = this.props;
+    const { loading } = this.state;
     // const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
     return (
-      <div>
+      <React.Fragment>
+        {loading && <Loading open={loading}/>}
         <Header
           color="transparent"
           brand="Blockchain Learning Group"
@@ -86,7 +126,7 @@ class ProfilePage extends React.Component {
           <div>
             <div className={classes.container}>
               <GridContainer justify="center">
-                <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
+                <GridItem xs={12} sm={12} md={12} className={classes.navWrapper}>
                   <NavPills
                     alignCenter
                     color="primary"
@@ -102,7 +142,7 @@ class ProfilePage extends React.Component {
                         tabButton: "Certificates",
                         tabIcon: CertIcon,
                         tabContent: (
-                          <CertificateForm certs={this.state.certificates} />
+                          <CertificateForm certs={this.state.certificates} countersign={this.countersign}/>
                         )
                       },
                     ]}
@@ -113,7 +153,7 @@ class ProfilePage extends React.Component {
           </div>
         </div>
         <Footer />
-      </div>
+      </React.Fragment>
     );
   }
 }

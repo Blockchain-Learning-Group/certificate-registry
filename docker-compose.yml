@@ -1,6 +1,20 @@
 version: '3'
 services:
 
+  issuance-service:
+    build: ./issuance-service
+    environment:
+      DB_LOCATION: rethinkdb
+      DB_PORT: 28015
+      PRIV: $PRIV
+    ports:
+      - "3001:3001"
+    depends_on:
+      - rethinkdb
+    networks:
+      testing_net:
+        ipv4_address: 172.28.1.4
+
   rethinkdb:
     build: ./rethinkdb
     ports:
