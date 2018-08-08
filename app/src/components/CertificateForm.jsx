@@ -9,7 +9,7 @@ import Grid from '@material-ui/core/Grid';
 // import BLGImage from '../assets/img/blg.jpg';
 
 const CertificateForm = (props) => {
-    const { certs, countersign, loading } = props;
+    const { certs, countersign } = props;
 
     return (
         certs.map((cert, index) => 
