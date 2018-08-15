@@ -11,6 +11,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
 import Hidden from "@material-ui/core/Hidden";
 import Drawer from "@material-ui/core/Drawer";
+import Typography from '@material-ui/core/Typography';
 // @material-ui/icons
 import Menu from "@material-ui/icons/Menu";
 // core components
@@ -74,9 +75,14 @@ class Header extends React.Component {
       [classes.fixed]: fixed
     });
     const brandComponent = (
-      <Button className={classes.title}>
-        {brand}
-      </Button>
+      //<Button className={classes.title}>
+      <Button color="#ffffff" href = "https://blockchainlearninggroup.com">About Us</Button>
+          // <Typography variant="title" color="inherit" className={classes.flex}>
+          //   About Us
+          // </Typography>
+          // <a href = "https://material-ui.com/demos/app-bar/">
+          // </a>
+      //</Button>
     );
     return (
       <AppBar className={appBarClasses}>
