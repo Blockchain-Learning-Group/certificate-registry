@@ -3,9 +3,7 @@ import React from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 
 // @material-ui/icons
-import Chat from "@material-ui/icons/Chat";
-import VerifiedUser from "@material-ui/icons/VerifiedUser";
-import Fingerprint from "@material-ui/icons/Fingerprint";
+
 import filter_1 from "@material-ui/icons/Filter1";
 import filter_2 from "@material-ui/icons/Filter2";
 import filter_3 from "@material-ui/icons/Filter3";
@@ -17,7 +15,7 @@ import GridItem from "components/Grid/GridItem.jsx";
 import InfoArea from "components/InfoArea/InfoArea.jsx";
 
 import productStyle from "assets/jss/material-kit-react/views/landingPageSections/productStyle.jsx";
-import team3 from "assets/img/faces/kendall.jpg";
+
 
 class ProductSection extends React.Component {
   render() {
