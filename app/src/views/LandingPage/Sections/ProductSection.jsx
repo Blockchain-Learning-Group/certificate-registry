@@ -70,7 +70,7 @@ description="You will now be tested on the concepts taught in your specific cour
               <InfoArea
                 title="Voila!"
                 description="Click on the My Certificates tab to obtain your Blockchain Learning Group attested developer certificate"
-                icon={filter_2}
+                icon={filter_4}
                 iconColor="success"
                 vertical
               />

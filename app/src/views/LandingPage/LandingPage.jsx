@@ -48,9 +48,8 @@ class LandingPage extends React.Component {
               <GridItem xs={12} sm={12} md={6}>
                 <h1 className={classes.title}>Ready to jumpstart your blockchain education?</h1>
                 <h4>
-                  Scroll down to see how to become a certified Blockchain Developer
-                  <br />
-                  Or click the red button to watch a quick video on getting started
+                  Scroll down to read how <br />
+                  Or watch this quick video
                 </h4>
                 <br />
                 <Button
