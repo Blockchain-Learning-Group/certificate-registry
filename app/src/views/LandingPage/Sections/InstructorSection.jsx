@@ -16,72 +16,85 @@ import CardFooter from "components/Card/CardFooter.jsx";
 
 import teamStyle from "assets/jss/material-kit-react/views/landingPageSections/teamStyle.jsx";
 
-import team1 from "assets/img/faces/avatar.jpg";
-import team2 from "assets/img/faces/christian.jpg";
-import team3 from "assets/img/faces/kendall.jpg";
+import adamImg from "assets/img/faces/adamImg.jpeg";
+
 
 class TeamSection extends React.Component {
-  render() {
-    const { classes } = this.props;
-    const imageClasses = classNames(
-      classes.imgRaised,
-      classes.imgRoundedCircle,
-      classes.imgFluid
-    );
-    return (
-      <div className={classes.section}>
-        <h2 className={classes.title}>Testimonials</h2>
-        <div>
-          <GridContainer>
-            <GridItem xs={12} sm={12} md={4}>
-              <Card plain>
-                <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
-                  <img src={team1} alt="..." className={imageClasses} />
-                </GridItem>
-                <h4 className={classes.cardTitle}>
-                  Gigi Hadid
+    render() {
+        const { classes } = this.props;
+        const imageClasses = classNames(
+            classes.imgRaised,
+            classes.imgRoundedCircle,
+            classes.imgFluid
+        );
+        return (
+            <div className={classes.section}>
+                <h2 className={classes.title}>Meet Your Instructor</h2>
+                <div>
+                    <GridContainer>
+                        <GridItem xs={12} sm={12} md={4}>
+                            <Card plain>
+                                <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
+
+                                </GridItem>
+                                <CardBody>
+                                </CardBody>
+                                <CardFooter className={classes.justifyCenter}>
+                                </CardFooter>
+                            </Card>
+                        </GridItem>
+                        <GridItem xs={12} sm={12} md={4}>
+                            <Card plain>
+                                <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
+                                    <img src={adamImg} alt="..." className={imageClasses} />
+                                </GridItem>
+                                <h4 className={classes.cardTitle}>
+                                    Adam Lemmon
                   <br />
-                  <small className={classes.smallTitle}>Model</small>
-                </h4>
-                <CardBody>
-                  <p className={classes.description}>
-                    You can write here details about one of your team members.
-                    You can give more details about what they do. Feel free to
+                                    <small className={classes.smallTitle}>VP, Blockscale Solutions and Blockchain Learning Group</small>
+                                </h4>
+                                <CardBody>
+                                    <p className={classes.description}>
+                                        You can write here details about one of your team members.
+                                        You can give more details about what they do. Feel free to
                     add some <a href="#pablo">links</a> for people to be able to
-                    follow them outside the site.
+                                                            follow them outside the site.
                   </p>
-                </CardBody>
-                <CardFooter className={classes.justifyCenter}>
-                  <Button
-                    justIcon
-                    color="transparent"
-                    className={classes.margin5}
-                  >
-                    <i className={classes.socials + " fab fa-twitter"} />
-                  </Button>
-                  <Button
-                    justIcon
-                    color="transparent"
-                    className={classes.margin5}
-                  >
-                    <i className={classes.socials + " fab fa-instagram"} />
-                  </Button>
-                  <Button
-                    justIcon
-                    color="transparent"
-                    className={classes.margin5}
-                  >
-                    <i className={classes.socials + " fab fa-facebook"} />
-                  </Button>
-                </CardFooter>
-              </Card>
-            </GridItem>
-            
-            </GridContainer>
+                                </CardBody>
+                                <CardFooter className={classes.justifyCenter}>
+                                    <Button
+                                        justIcon
+                                        color="transparent"
+                                        className={classes.margin5}
+                                        href="https://www.linkedin.com/in/adamjlemmon/"
+                                    >
+                                        <i className={classes.socials + " fab fa-linkedin"} />
+                                    </Button>
+                                    <Button
+                                        justIcon
+                                        color="transparent"
+                                        className={classes.margin5}
+                                        href="https://github.com/AdamJLemmon"
+                                    >
+                                        <i className={classes.socials + " fab fa-github"} />
+                                    </Button>
+                                    <Button
+                                        justIcon
+                                        color="transparent"
+                                        className={classes.margin5}
+
+                                    >
+                                        <i className={classes.socials + " fab fa-twitter"} />
+                                    </Button>
+                                </CardFooter>
+                            </Card>
+                        </GridItem>
+
+                    </GridContainer>
+                </div>
             </div>
-      </div>
-    );
-  }
+        );
+    }
 }
 
 export default withStyles(teamStyle)(TeamSection);
