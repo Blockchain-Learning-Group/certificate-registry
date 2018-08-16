@@ -1,178 +1,78 @@
-import React from "react";
-// nodejs library that concatenates classes
-import classNames from "classnames";
-// nodejs library to set properties for components
-import PropTypes from "prop-types";
-// @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import Button from "@material-ui/core/Button";
-import Hidden from "@material-ui/core/Hidden";
-import Drawer from "@material-ui/core/Drawer";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
-// @material-ui/icons
-import Menu from "@material-ui/icons/Menu";
-// core components
-import headerStyle from "assets/jss/material-kit-react/components/headerStyle.jsx";
 
-class Header extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      mobileOpen: false
-    };
-    this.handleDrawerToggle = this.handleDrawerToggle.bind(this);
-    this.headerColorChange = this.headerColorChange.bind(this);
-  }
-  handleDrawerToggle() {
-    this.setState({ mobileOpen: !this.state.mobileOpen });
-  }
-  componentDidMount() {
-    if (this.props.changeColorOnScroll) {
-      window.addEventListener("scroll", this.headerColorChange);
-    }
-  }
-  headerColorChange() {
-    const { classes, color, changeColorOnScroll } = this.props;
-    const windowsScrollTop = window.pageYOffset;
-    if (windowsScrollTop > changeColorOnScroll.height) {
-      document.body
-        .getElementsByTagName("header")[0]
-        .classList.remove(classes[color]);
-      document.body
-        .getElementsByTagName("header")[0]
-        .classList.add(classes[changeColorOnScroll.color]);
-    } else {
-      document.body
-        .getElementsByTagName("header")[0]
-        .classList.add(classes[color]);
-      document.body
-        .getElementsByTagName("header")[0]
-        .classList.remove(classes[changeColorOnScroll.color]);
-    }
-  }
-  componentWillUnmount() {
-    if (this.props.changeColorOnScroll) {
-      window.removeEventListener("scroll", this.headerColorChange);
-    }
-  }
+
+
+function TabContainer(props) {
+  return (
+    <Typography component="div" style={{ padding: 8 * 3 }}>
+      {props.children}
+    </Typography>
+  );
+}
+
+TabContainer.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+    width: '100%',
+    backgroundColor: theme.palette.background.paper,
+  },
+});
+
+class ScrollableTabsButtonAuto extends React.Component {
+  state = {
+    value: 1,
+  };
+
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
+
   render() {
-    const {
-      classes,
-      color,
-      rightLinks,
-      leftLinks,
-      brand,
-      fixed,
-      absolute
-    } = this.props;
-    const appBarClasses = classNames({
-      [classes.appBar]: true,
-      [classes[color]]: color,
-      [classes.absolute]: absolute,
-      [classes.fixed]: fixed
-    });
-    const brandComponent = (
-      //<Button className={classes.title}>
-      <Button color="#ffffff" href = "https://blockchainlearninggroup.com">About Us</Button>
-          // <Typography variant="title" color="inherit" className={classes.flex}>
-          //   About Us
-          // </Typography>
-          // <a href = "https://material-ui.com/demos/app-bar/">
-          // </a>
-      //</Button>
-    );
+    const { classes } = this.props;
+    const { value } = this.state;
+
     return (
-      <AppBar className={appBarClasses}>
-        <Toolbar className={classes.container}>
-          {leftLinks !== undefined ? brandComponent : null}
-          <div className={classes.flex}>
-            {leftLinks !== undefined ? (
-              <Hidden smDown implementation="css">
-                {leftLinks}
-              </Hidden>
-            ) : (
-              brandComponent
-            )}
-          </div>
-          <Hidden smDown implementation="css">
-            {rightLinks}
-          </Hidden>
-          <Hidden mdUp>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={this.handleDrawerToggle}
-            >
-              <Menu />
-            </IconButton>
-          </Hidden>
-        </Toolbar>
-        <Hidden mdUp implementation="css">
-          <Drawer
-            variant="temporary"
-            anchor={"right"}
-            open={this.state.mobileOpen}
-            classes={{
-              paper: classes.drawerPaper
-            }}
-            onClose={this.handleDrawerToggle}
+      <div className={classes.root}>
+        <AppBar position="static" color="default">
+          <Tabs
+            value={value}
+            onChange={this.handleChange}
+            indicatorColor="primary"
+            textColor="primary"
+            scrollable
+            scrollButtons="auto"
           >
-            <div className={classes.appResponsive}>
-              {leftLinks}
-              {rightLinks}
-            </div>
-          </Drawer>
-        </Hidden>
-      </AppBar>
+            <Tab label="About Us" />
+            <Tab label="How it Works" />
+            <Tab label="Ongoing Courses" />
+            <Tab label="Upcoming Courses" />
+            <Tab label="Your Certificates" />
+            <Tab label="" />
+            <Tab label="" />
+            <Tab label=" My Profile"/>
+            
+          </Tabs>
+         
+        </AppBar>
+       
+
+      </div>
     );
   }
 }
 
-Header.defaultProp = {
-  color: "white"
-};
-
-Header.propTypes = {
+ScrollableTabsButtonAuto.propTypes = {
   classes: PropTypes.object.isRequired,
-  color: PropTypes.oneOf([
-    "primary",
-    "info",
-    "success",
-    "warning",
-    "danger",
-    "transparent",
-    "white",
-    "rose",
-    "dark"
-  ]),
-  rightLinks: PropTypes.node,
-  leftLinks: PropTypes.node,
-  brand: PropTypes.string,
-  fixed: PropTypes.bool,
-  absolute: PropTypes.bool,
-  // this will cause the sidebar to change the color from
-  // this.props.color (see above) to changeColorOnScroll.color
-  // when the window.pageYOffset is heigher or equal to
-  // changeColorOnScroll.height and then when it is smaller than
-  // changeColorOnScroll.height change it back to
-  // this.props.color (see above)
-  changeColorOnScroll: PropTypes.shape({
-    height: PropTypes.number.isRequired,
-    color: PropTypes.oneOf([
-      "primary",
-      "info",
-      "success",
-      "warning",
-      "danger",
-      "transparent",
-      "white",
-      "rose",
-      "dark"
-    ]).isRequired
-  })
 };
 
-export default withStyles(headerStyle)(Header);
+export default withStyles(styles)(ScrollableTabsButtonAuto);
