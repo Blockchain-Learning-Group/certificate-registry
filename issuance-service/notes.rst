@@ -19,7 +19,8 @@ Testing
 ########
 
 - need to have a rethink instance running: `docker-compose up rethinkdb`
-- run test suite: `yarn test`
+- Need to set private key in execution env
+- run test suite: `PRIV=$PRIV yarn test`
 
 ## Integration testing
 - for automation with nothing running you may run `./scripts/integration-test.sh`

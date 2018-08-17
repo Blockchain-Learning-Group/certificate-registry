@@ -22,7 +22,7 @@ describe('/countersignCert PUT', () => {
   });
 
   describe('Countersigning a cert with valid parameters', () => {
-    it.only('should return a 200', async () => {
+    it('should return a 200', async () => {
       const res = await sendRequest(apiPath, 'countersignCert', 'PUT', { sig, id: dbId });
       const { statusCode } = res;
       assert.strictEqual(statusCode, 200, 'statusCode incorrect');

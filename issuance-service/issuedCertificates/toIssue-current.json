@@ -1,0 +1,85 @@
+{
+    "location": "Toronto, Ontario, Canada",
+    "description": "Blockchain Application Development Fundamentals",
+    "issuingAuthority": "Blockchain Learning Group Inc.",
+    "issuingAuthorityAddress": "0xcfe2bd9f6b83d446ffcb911b7873685b35736815",
+    "daysValidFor": "365",
+    "recipients": [
+        {
+            "firstNames": "Victor",
+            "lastName": "Weng",
+            "email": "vweng@toronto.ca",
+            "address": "0x95D4Aa4acABc167Fc6192F3004909299f8C6b6cD"
+        },
+
+        {
+            "firstNames": "Richard",
+            "lastName": "Zheng",
+            "email": "rzheng@toronto.ca",
+            "address": "0xdb6032DB250350aA067f2C18BaFC1cf1c7f7Af9e"
+        },
+
+        {
+            "firstNames": "Eric",
+            "lastName": "Filmer",
+            "email": "eric.filmer@toronto.ca",
+            "address": "0x1f275d9f7dad99f3a1771d99e53a928ed3b5d395"
+        },
+
+        {
+            "firstNames": "",
+            "lastName": "",
+            "email": "",
+            "address": ""
+        },
+
+        {
+            "firstNames": "",
+            "lastName": "",
+            "email": "",
+            "address": ""
+        },
+
+        {
+            "firstNames": "",
+            "lastName": "",
+            "email": "",
+            "address": ""
+        },
+
+        {
+            "firstNames": "",
+            "lastName": "",
+            "email": "",
+            "address": ""
+        },
+
+        {
+            "firstNames": "",
+            "lastName": "",
+            "email": "",
+            "address": ""
+        },
+
+        {
+            "firstNames": "",
+            "lastName": "",
+            "email": "",
+            "address": ""
+        },
+
+        {
+            "firstNames": "",
+            "lastName": "",
+            "email": "",
+            "address": ""
+        },
+
+        {
+            "firstNames": "",
+            "lastName": "",
+            "email": "",
+            "address": ""
+        }
+    ]
+}
