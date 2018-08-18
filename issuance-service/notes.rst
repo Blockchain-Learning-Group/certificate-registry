@@ -2,9 +2,10 @@
 CLI Usage
 ########
 
-- Start the rethinkdb and issuance service: ``docker-compose up``
+- Start the rethinkdb: ``docker-compose up rethinkdb``
+- Start issuance service: ``PRIV=f6f2827297cd95da7176533eceed3348a8690cc5211be84da4489e37fc63cdca docker-compose up issuance-service``
 - Update the json of certificates to issue ``issuedCertificates/toIssue.json``
-- Execute the script to issue the certs ``yarn issue-certs``
+- Execute the script to issue the certs ``cd issuance-service && yarn issue-certs``
 
 
 ##########

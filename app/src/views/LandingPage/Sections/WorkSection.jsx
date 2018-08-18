@@ -2,6 +2,8 @@ import React from "react";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 
+
+
 // @material-ui/icons
 
 // core components
@@ -13,68 +15,77 @@ import Button from "components/CustomButtons/Button.jsx";
 import workStyle from "assets/jss/material-kit-react/views/landingPageSections/workStyle.jsx";
 
 class WorkSection extends React.Component {
-  render() {
-    const { classes } = this.props;
-    return (
-      <div className={classes.section}>
-        <GridContainer justify="center">
-          <GridItem cs={12} sm={12} md={8}>
-            <h2 className={classes.title}>Work with us</h2>
-            <h4 className={classes.description}>
-              Divide details about your product or agency work into parts. Write
-              a few lines about each one and contact us about any further
-              collaboration. We will responde get back to you in a couple of
-              hours.
-            </h4>
-            <form>
-              <GridContainer>
-                <GridItem xs={12} sm={12} md={6}>
-                  <CustomInput
-                    labelText="Your Name"
-                    id="name"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={6}>
-                  <CustomInput
-                    labelText="Your Email"
-                    id="email"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                  />
-                </GridItem>
-                <CustomInput
-                  labelText="Your Message"
-                  id="message"
-                  formControlProps={{
-                    fullWidth: true,
-                    className: classes.textArea
-                  }}
-                  inputProps={{
-                    multiline: true,
-                    rows: 5
-                  }}
-                />
+    render() {
+        const { classes } = this.props;
+        return (
+            <div className={classes.section}>
                 <GridContainer justify="center">
-                  <GridItem
-                    xs={12}
-                    sm={12}
-                    md={4}
-                    className={classes.textCenter}
-                  >
-                    <Button color="primary">Send Message</Button>
-                  </GridItem>
+                    <GridItem cs={12} sm={12} md={8}>
+                        <h2 className={classes.title}>Got Questions</h2>
+                        <h4 className={classes.description}>
+
+
+                            <a
+                                href="https://www.blockchainlearninggroup.com/"
+                                className={classes.block}
+                                target="_blank"
+                            >
+                                Check out our FAQ's
+              </a>
+                            <br />
+                            or<br />
+                            Enter your question and we will get back to you as soon as possible
+            </h4>
+                        <form>
+                            <GridContainer>
+                                <GridItem xs={12} sm={12} md={6}>
+                                    <CustomInput
+                                        labelText="Your Name"
+                                        id="name"
+                                        formControlProps={{
+                                            fullWidth: true
+                                        }}
+                                    />
+                                </GridItem>
+                                <GridItem xs={12} sm={12} md={6}>
+                                    <CustomInput
+                                        labelText="Your Email"
+                                        id="email"
+                                        formControlProps={{
+                                            fullWidth: true
+                                        }}
+                                    />
+                                </GridItem>
+                                <CustomInput
+                                    labelText="Your Question"
+                                    id="message"
+                                    formControlProps={{
+                                        fullWidth: true,
+                                        className: classes.textArea
+                                    }}
+                                    inputProps={{
+                                        multiline: true,
+                                        rows: 5
+                                    }}
+                                />
+                                <GridContainer justify="center">
+                                    <GridItem
+                                        xs={12}
+                                        sm={12}
+                                        md={4}
+                                        className={classes.textCenter}
+                                    >
+                                        <Button color="primary" href="https://material-ui.com/demos/app-bar/">Send Message</Button>
+                                    </GridItem>
+                                </GridContainer>
+                            </GridContainer>
+                        </form>
+                    </GridItem>
                 </GridContainer>
-              </GridContainer>
-            </form>
-          </GridItem>
-        </GridContainer>
-      </div>
-    );
-  }
+            </div>
+        );
+    }
 }
 
 export default withStyles(workStyle)(WorkSection);
+
