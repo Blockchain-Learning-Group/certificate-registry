@@ -19,11 +19,14 @@ const CertificateForm = (props) => {
                     <Grid item>
                         <Paper
                             key={index}
-                            style={{ marginBottom: 100, marginLeft: 'auto', marginRight: 'auto', width: "80%", }}
-                            elevation={5}
+                            style={{ marginBottom: 100, marginLeft: 'auto', marginRight: 'auto', width: "85%", }}
+                            elevation={8}
+                            
                         >
-                            <h2>Certificate {certs.length - index}</h2>
-                            <img src={require('./Blockchain+Essentials.png')} />
+                        <Typography variant="display3">
+                            Certificate Of Accomplishment
+                            </Typography>
+                            <img src={require('./blg.png')} />
                             <Grid container style={{ margin: '1.5em' }} direction="column" spacing={16}>
                                 <Grid item>
                                     <Typography variant="title" align="left">
@@ -31,19 +34,19 @@ const CertificateForm = (props) => {
                                     </Typography>
                                     <Typography align="left">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                        Cras rhoncus ante quis est ultricies dapibus.
+                                        Cras rhoncus ante 
                                         Aenean lacinia gravida interdum.
-                                        Nunc eu sem quis diam euismod dictum quis ultrices turpis.
-                                        Nam elementum tempus vestibulum.
-                                        Sed bibendum eros erat, ac pharetra tellus ornare nec.
-                                        Pellentesque fermentum justo ac pretium consequat.
+                                    </Typography>
+                                    <Typography align="left">
+                                    Nunc eu sem quis diam euismod dictum quis ultrices turpis.
+                                    Nam elementum tempus vestibulum.
                                     </Typography>
                                 </Grid>
                                 <Grid item>
                                     <Grid
                                         container
                                         spacing={8}
-                                        justify="flex-start"
+                                        justify="space-evenly"
                                     >
 
                                         <Grid item>
@@ -51,7 +54,14 @@ const CertificateForm = (props) => {
                                                 Issuing Authority
                                     </Typography>
                                             <Typography align="left">
-                                                Blockchain Learning Group Inc.
+                                            <a
+                                                href="https://www.blockchainlearninggroup.com/"
+                                                color = "primary"
+                                                target="_blank"
+                                            >
+                                                Blockchain Learning Group
+                                                
+                                             </a>
                                     </Typography>
 
                                         </Grid>
@@ -72,7 +82,7 @@ const CertificateForm = (props) => {
                                         </Grid>
                                         <Grid item>
                                             <Typography variant="body2" align="left">
-                                                Issuance Timestamp
+                                                Expiry Timestamp
                                     </Typography>
                                             <Typography align="left">
                                                 {String(new Date(cert.issuanceDate))}
@@ -80,42 +90,96 @@ const CertificateForm = (props) => {
                                         </Grid>
                                     </Grid>
                                 </Grid>
-                            </Grid>
 
+                                
+                                <Grid item>
+                                    <Grid
+                                        container
+                                        spacing={8}
+                                        justify="flex-start"
+                                    >
+
+                                        
+                                    </Grid>
+                                    <Grid
+                                        container
+                                        spacing={8}
+                                        justify="flex-start"
+                                        
+                                    >
+
+                                        <Grid item>
+                                            <Typography variant="body2" align="left">
+                                                IPFS Hash
+                                    </Typography>
+                                            <Typography align="left">
+                                                {cert.ipfsHash}
+                                            </Typography>
+                                            
+                                        </Grid>    
+                               
+                                    </Grid>
+                                </Grid>
+                                <Grid item>
+                                    <Grid
+                                        container
+                                        spacing={8}
+                                        justify="flex-start"
+                                    >
+
+                                        
+                                    </Grid>
+                                    <Grid
+                                        container
+                                        spacing={8}
+                                        justify="flex-start"
+                                        
+                                    >
+
+ 
+                                        <Grid item>
+                                        <span> </span>
+                                            <Typography variant="body2" align="left">
+                                                Location
+                                    </Typography>
+                                            <Typography align="left">
+                                                {cert.location}
+                                            </Typography>
+                                            
+                                        </Grid>                                   
+                                    </Grid>
+                                </Grid>
+                                
+                            </Grid>
+                                
+                               
 
                             <FormControl fullWidth={true}>
-                                <TextField label="Issuance Timestamp" style={{ margin: 10 }} InputProps={{ readOnly: true, value: String(new Date(cert.issuanceDate)) }} />
-                                <TextField label="Expiry Timestamp" style={{ margin: 10 }} InputProps={{ readOnly: true, value: String(new Date(cert.expiryDate)) }} />
-                                <TextField label="IPFS Hash" style={{ margin: 10 }} InputProps={{ readOnly: true, value: cert.ipfsHash }} />
-                                <TextField label="Issuing Authority" style={{ margin: 10 }} InputProps={{ readOnly: true, value: cert.issuingAuthority }} />
-                                <TextField label="Location" style={{ margin: 10 }} InputProps={{ readOnly: true, value: cert.location }} />
+                                
                                 {
                                     (cert.signatures.issuingAuthoritySignature !== 'undefined')
                                         ?
                                         <Paper>
-                                            <p>Signature data...</p>
-                                            <Grid container justify="center">
-                                                <Grid item xs={12}>
-                                                    <TextField label="Message" style={{ margin: 10, width: "90%" }}
-                                                        InputProps={{ readOnly: true, value: cert.signatures.issuingAuthoritySignature.message }}
-                                                    />
-                                                </Grid>
-                                                <Grid item xs={12}>
+                                            <Typography variant="display1">
+                                            Signature Data
+                                            </Typography>
+                                            <Grid container justify="space-around">
+                                                <Grid item xs={10}>
                                                     <TextField label="Message Hash" style={{ margin: 10, width: "90%" }}
                                                         InputProps={{ readOnly: true, value: cert.signatures.issuingAuthoritySignature.messageHash }}
                                                     />
                                                 </Grid>
-                                                <Grid item xs={12}>
+                                                <Grid item xs={10} justify="center">
                                                     <TextField label="Issuing Authority Key" style={{ margin: 10, width: "90%" }}
                                                         InputProps={{ readOnly: true, value: cert.issuingAuthorityAddress }}
                                                     />
                                                 </Grid>
-                                                <Grid item xs={12}>
+                                                <Grid item xs={10}>
                                                     <TextField label="Issuing Authority Signature" style={{ margin: 10, width: "90%" }}
                                                         InputProps={{ readOnly: true, value: cert.signatures.issuingAuthoritySignature.signature }}
                                                     />
                                                 </Grid>
-                                                <Grid item xs={12}>
+                                                <Grid item xs={10}>
                                                     <TextField label="Recipient Key" style={{ margin: 10, width: "90%" }} InputProps={{ readOnly: true, value: cert.recipientAddress }} />
                                                 </Grid>
                                                 {
@@ -141,7 +205,7 @@ const CertificateForm = (props) => {
                                                             </ Grid>
                                                         )
                                                         :
-                                                        (<Button id={index} fullWidth={true} style={{ margin: 20 }} variant="contained" color="secondary" onClick={countersign}>
+                                                        (<Button id={index} fullWidth={true} style={{ margin: 20 }} variant="contained" color="primary" onClick={countersign}>
                                                             Countersign
                                                     <EditIcon style={{ margin: 10, fontSize: 36 }} />
                                                         </Button>)
