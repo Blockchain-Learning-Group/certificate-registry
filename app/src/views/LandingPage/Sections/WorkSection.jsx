@@ -28,7 +28,7 @@ class WorkSection extends React.Component {
                             <a
                                 href="https://www.blockchainlearninggroup.com/"
                                 className={classes.block}
-                                target="_blank"
+                                
                             >
                                 Check out our FAQ's
               </a>
