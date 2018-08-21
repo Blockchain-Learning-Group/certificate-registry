@@ -46,7 +46,7 @@ const CertificateForm = (props) => {
                                     <Grid
                                         container
                                         spacing={8}
-                                        justify="space-evenly"
+                                    
                                     >
 
                                         <Grid item>
@@ -69,7 +69,7 @@ const CertificateForm = (props) => {
                                     <Grid
                                         container
                                         spacing={8}
-                                        justify="space-evenly"
+                                        
                                     >
 
                                         <Grid item>
@@ -133,24 +133,24 @@ const CertificateForm = (props) => {
                                             <Typography variant="body2" align="left">
                                                 Skills Gained
                                     </Typography>
-                                            <Button color="default" variant = "raised" href = "https://blockscalesolutions.com/">
+                                            <Button color="default" variant = "raised">
                                             
                                                 Blockchain
                                             </Button>
                                             
-                                            <Button color="default" variant = "raised" href = "https://blockscalesolutions.com/">
+                                            <Button color="default" variant = "raised">
                                             
                                                 DLT
                                             </Button>
-                                            <Button color="default" variant = "raised" href = "https://blockscalesolutions.com/">
+                                            <Button color="default" variant = "raised">
                                             
                                             Hyperledger
                                         </Button>
-                                        <Button color="default" variant = "raised" href = "https://blockscalesolutions.com/">
+                                        <Button color="default" variant = "raised">
                                             
                                             Ledger
                                         </Button>
-                                        <Button color="default" variant = "raised" href = "https://blockscalesolutions.com/">
+                                        <Button color="default" variant = "raised">
                                             
                                             Open Source
                                         </Button>
@@ -210,8 +210,12 @@ const CertificateForm = (props) => {
                                                         ?
                                                         (
                                                             <Grid container>
-                                                                <Grid item xs={12}>
-                                                                    <TextField label="Recipient Signature" style={{ margin: 10, width: "90%" }}
+                                                                <Grid item xs={10}>
+                                                                <Typography variant="body2" color="primary" align="left">
+                                                                Recipient Signature
+                                                    </Typography>                                                                                     
+                                                     
+                                                                    <TextField style={{ margin: 2, width: "100%" }}
                                                                         InputProps={{ readOnly: true, value: cert.signatures.recipientSignature }}
                                                                     />
                                                                 </ Grid>
