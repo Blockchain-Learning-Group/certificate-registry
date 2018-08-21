@@ -5,9 +5,16 @@
     "issuingAuthorityAddress": "0xcfe2bd9f6b83d446ffcb911b7873685b35736815",
     "daysValidFor": "365",
     "recipients": [{
-        "firstNames": "Adam John",
-        "lastName": "Lemmon",
+        "firstNames": "Manik",
+        "lastName": "Chaudhery",
         "email": "manik.chaudhery@gmail.com",
         "address": "0xad72A42A278881311929DCE42D328CD1a4568Ac3"
+    },
+    {
+        "firstNames": "Manik",
+        "lastName": "Chaudhery",
+        "email": "chaudhery@gmail.com",
+        "address": "0xad72A42A278881311929DCE42D328CD1a4568Ac3"
     }]
+
 }
