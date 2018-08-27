@@ -64,7 +64,6 @@ class ScrollableTabsButtonAuto extends React.Component {
           </Tabs>
          
         </AppBar>
-       
 
       </div>
     );

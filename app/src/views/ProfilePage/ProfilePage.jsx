@@ -14,16 +14,24 @@ import GridItem from "components/Grid/GridItem.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import NavPills from "components/NavPills/NavPills.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
+import InputAdornment from '@material-ui/core/InputAdornment';
+import AccountCircle from '@material-ui/icons/VerifiedUser';
 
 // import blg from "assets/img/blg.jpg";
 
 import profilePageStyle from "assets/jss/material-kit-react/views/profilePage.jsx";
 import getCertificates from "../../stores/getCertificates";
-import ProfileForm from "../../components/ProfileForm";
 import CertificateForm from "../../components/CertificateForm";
 import Loading from "../../components/Loading";
 
 import Countersign from '../../services/Web3';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import { Typography } from '@material-ui/core';
+import CardUI from './CardUI'
+
+var certificates;
+var details = new Array();
 
 class ProfilePage extends React.Component {
   constructor(props) {
@@ -53,17 +61,20 @@ class ProfilePage extends React.Component {
     const { id } = this.props.match.params;
 
     if (id) {
-      const certificates = await getCertificates(JSON.stringify({ recipientEmail: id }));
+       certificates = await getCertificates(JSON.stringify({ recipientEmail: id }));
 
       if (certificates) {
         const sorted = certificates.sort(this.sortLatest);
 
         this.setState({ certificates: sorted });
-
+        details.push(certificates[0].recipientFirstNames)
+        details.push(certificates[0].recipientLastName)
+        details.push(certificates[0].recipientEmail)
+        details.push(certificates[0].recipientAddress)
         // Set data to be rendered
         const userProfile = [
           {
-            label: "First Names",
+            label: "First Name",
             value: certificates[0].recipientFirstNames
           },
           {
@@ -126,7 +137,8 @@ class ProfilePage extends React.Component {
           <div>
             <div className={classes.container}>
               <GridContainer justify="center">
-                <GridItem xs={12} sm={12} md={12} className={classes.navWrapper}>
+               <GridItem xs={12} sm={12} md={12} className={classes.navWrapper}>
+                <Grid container style={{ margin: '1.5em' }} direction="column" spacing={16}>
                   <NavPills
                     alignCenter
                     color="primary"
@@ -135,8 +147,50 @@ class ProfilePage extends React.Component {
                         tabButton: "Profile",
                         tabIcon: UserIcon,
                         tabContent: (
-                          <ProfileForm profile={this.state.userProfile} />
+                          <Paper               
+                          style={{ marginBottom: 100, marginLeft: 'auto', marginRight: 'auto', width: "85%", }}
+                          elevation={8}
+                          //square = {false}
+                          >
+                      
+                        
+                          <Typography variant="body2" align="left">
+                            First Name:
+                            <InputAdornment position="start">
+                            <AccountCircle />
+                            {details[0]}
+                        </InputAdornment> 
+                          </Typography>
+                          <GridItem xs={12}>
+                          </GridItem>                                                  
+                          <Typography variant="body2" align="left">
+                            Last Name: 
+                            <InputAdornment position="start">
+                            <AccountCircle />
+                            {details[1]}
+                        </InputAdornment>
+                           </Typography>
+                           <Typography variant="body2" align="left">
+                            Email:
+                            <InputAdornment position="start">
+                            <AccountCircle />
+                            {details[2]}
+                        </InputAdornment>
+                           </Typography>
+                           <Typography variant="body2" align="left">
+                           Verification Key:
+                            <InputAdornment position="start">
+                            <AccountCircle />
+                            {details[3]}
+                        </InputAdornment>
+                           </Typography>
+                           </Paper>
+
+                          //<ProfileForm profile={this.state.userProfile} />
+                          
                         )
+
+                        
                       },
                       {
                         tabButton: "Certificates",
@@ -146,9 +200,11 @@ class ProfilePage extends React.Component {
                         )
                       },
                     ]}
-                  />
+                  /> 
+                  </Grid>
                 </GridItem>
               </GridContainer>
+             
             </div>
           </div>
         </div>
